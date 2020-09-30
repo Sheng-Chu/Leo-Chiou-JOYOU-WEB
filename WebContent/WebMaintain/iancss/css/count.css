@@ -1,0 +1,21 @@
+.half-left {
+    float: left;
+    width: 40%;
+}
+.section {
+    background: #ffffff;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+div {
+    display: block;
+}
+.numscroller-big-bottom {
+    font-size: 44px;
+    text-align: center;
+}
+.numscroller-info-top {
+    font-size: 12px;
+    margin-bottom: 10px;
+}

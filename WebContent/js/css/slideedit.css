@@ -1,0 +1,147 @@
+.slider {
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+.slide_viewer {
+  height: 350px;
+  overflow: hidden;
+  position: relative;
+}
+
+.slide_group {
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.slide {
+  display: none;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+.slide:first-child {
+  display: block;
+}
+
+.slide:nth-of-type(1) {
+  background: #ffd335;
+}
+
+.slide:nth-of-type(2) {
+  background: #ffd335;
+}
+
+.slide:nth-of-type(3) {
+  background: #ffd335;
+}
+
+.slide:nth-of-type(4) {
+  background: #ffd335;
+}
+
+.slide_buttons {
+  left: 0;
+  position: absolute;
+  right: 8.5px;
+  text-align: center;
+  bottom: 80px;
+}
+
+a.slide_btn {
+  color: #171e5d;
+  font-size: 42px;
+  margin: 1 0.175em;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -ms-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.slide_btn.active,
+.slide_btn:hover {
+  color: #ffd335;
+  cursor: pointer;
+}
+
+.directional_nav {
+  /* height: 50px; */
+  margin: 20px auto;
+  max-width: 1150px;
+  position: relative;
+  top: -195px;
+}
+
+.previous_btn {
+  bottom: 0;
+  left: 50px;
+  margin: auto;
+  position: absolute;
+  top: 0;
+}
+
+.next_btn {
+  bottom: 0;
+  margin: auto;
+  position: absolute;
+  right: 40px;
+  top: 0;
+}
+
+.previous_btn,
+.next_btn {
+  cursor: pointer;
+  height: 50px;
+  opacity: 0.5;
+  -webkit-transition: opacity 0.4s ease-in-out;
+  -moz-transition: opacity 0.4s ease-in-out;
+  -ms-transition: opacity 0.4s ease-in-out;
+  -o-transition: opacity 0.4s ease-in-out;
+  transition: opacity 0.4s ease-in-out;
+  width: 50px;
+}
+
+.previous_btn:hover,
+.next_btn:hover {
+  opacity: 1;
+}
+
+.image {
+  width: 100%;
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
+}
+/* 改按鈕顏色 */
+.imgbutton {
+  border-radius: 20px;
+  border: 1px solid #171e5d;
+  background-color: #171e5d;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+  position: absolute;
+  top: 150.8px;
+  left: 360.72px;
+  cursor: pointer;
+}
+
+.imgbutton:active {
+  transform: scale(0.95);
+}
+
+.imgbutton:focus {
+  outline: none;
+}
+
+.imgbutton.ghost {
+  background-color: transparent;
+  border-color: #ffffff;
+}
