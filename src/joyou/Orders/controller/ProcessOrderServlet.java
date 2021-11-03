@@ -105,6 +105,7 @@ public class ProcessOrderServlet extends HttpServlet {
 		List<OrdersBean> allOrder = oDao.selectAll();
 		request.getSession().setAttribute("OrderNum", allOrder.get(allOrder.size()-1).getOrderId());  
 		request.getSession().setAttribute("discode",0); ///新增完後折扣歸0
+		request.getSession().setAttribute("Cart", 0); 
 		
 		session.getTransaction().commit();
 		

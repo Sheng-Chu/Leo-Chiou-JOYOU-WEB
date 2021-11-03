@@ -318,7 +318,7 @@
         document.getElementsByName("userPreferGameType")[0].setAttribute("disabled", "");
         document.getElementsByName("userPicture")[0].setAttribute("disabled", "");
 
-        document.getElementById("preview_progressbarTW_img").setAttribute("src","up_NoUsed/${memberImageFileName}?rand="+rand);
+        document.getElementById("preview_progressbarTW_img").setAttribute("src","up_NoUsed/${memberImageFileName}");
         
     </script>
 

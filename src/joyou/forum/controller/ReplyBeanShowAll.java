@@ -14,6 +14,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import joyou.forum.dao.ReplyBeanDAO;
 import joyou.forum.dao.ReplyBeanDAOImpl;
@@ -35,9 +36,11 @@ public class ReplyBeanShowAll extends HttpServlet {
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
 		try (PrintWriter out = response.getWriter();) {
-			ReplyBeanDAO rDAO = new ReplyBeanDAOImpl();
-			List<ReplyBean> rBean = rDAO.selectAll();
-			String categoriesJson = new Gson().toJson(rBean);
+			ReplyBeanDAO rDAO = new ReplyBeanDAOImpl();Integer contentid;
+			contentid = Integer.parseInt(request.getParameter("contentId").trim());
+			List<ReplyBean> rBean = rDAO.selectByContentId(contentid);
+			Gson gs = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+			String categoriesJson = gs.toJson(rBean);
 			out.write(categoriesJson);
 			session.getTransaction().commit();
 			out.close();

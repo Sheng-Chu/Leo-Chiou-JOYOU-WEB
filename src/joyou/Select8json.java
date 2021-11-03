@@ -17,7 +17,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import joyou.Orders.dao.OrderItemDao;
+import joyou.Orders.dao.OrdersDao;
 import joyou.Orders.model.OrderItemBean;
+import joyou.Orders.model.OrdersBean;
 import joyou.util.HibernateUtil;
 @WebServlet("/orderlist.json")
 public class Select8json extends HttpServlet{
@@ -35,6 +37,9 @@ public class Select8json extends HttpServlet{
 			) {
 				 OrderItemDao dao = new OrderItemDao(session);
 				 List<OrderItemBean> obean = dao.selectAll(); 
+				 
+				 OrdersDao odao = new OrdersDao(session);
+				 List<OrdersBean> odbean = odao.selectAll(); 
 				
 				  	 int  partyGames= 0;
 					 int  strategyGames= 0;
@@ -86,8 +91,8 @@ public class Select8json extends HttpServlet{
 					eight[6]=childrenGames;
 					eight[7]=familyGames;
 					eight[8]=0;
-					for(int i =0 ;i<8;i++) {
-						eight[8]=eight[8]+eight[i];
+					for(int i =0 ;i<odbean.size();i++) {
+						eight[8]=eight[8]+odbean.get(i).getOrderAmount();
 					}
 					request.getSession().setAttribute("countsell", eight[8]);
 				 

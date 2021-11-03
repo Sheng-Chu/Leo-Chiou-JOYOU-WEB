@@ -10,14 +10,22 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import joyou.Orders.model.OrderItemBean;
+import joyou.forum.model.ForumBean;
 import joyou.forum.model.ReplyBean;
 import joyou.util.HibernateUtil;
 
 	@Repository
 	public class ReplyBeanDAOImpl implements ReplyBeanDAO {
 
+		private Session session;
+
 		public ReplyBeanDAOImpl() {
 
+		}
+		
+		public ReplyBeanDAOImpl(Session session) {
+			this.session=session;
 		}
 
 		@Autowired
@@ -45,24 +53,25 @@ import joyou.util.HibernateUtil;
 			return session.get(ReplyBean.class, replyId);
 		}
 
-		@SuppressWarnings("unchecked")
+		
+		
 		@Override
-		public List<ReplyBean> selectAll() {
+		public List<ReplyBean> selectByContentId(Integer contentId){  //依文章ID查詢
 			Session session = sessionFactory.getCurrentSession();
-			List<ReplyBean> list = session.createQuery("From ReplyBean").getResultList();
+			Query<ReplyBean> query = session.createQuery("from ReplyBean where contentId=:id", ReplyBean.class);
+			query.setParameter("id", contentId);	
+			List<ReplyBean> list = query.list();
 			return list;
+			
 		}
-
+		
 		@Override
-		public ReplyBean update(Integer replyId, String replyContent, String replyDate) {
+		public ReplyBean update(Integer replyId, String replyContent) {
 			Session session = sessionFactory.getCurrentSession();
-			ReplyBean replyBean = session.load(ReplyBean.class, replyId);
-
-			if (replyBean != null) {
+			ReplyBean replyBean = session.get(ReplyBean.class, replyId);
+			if(replyBean != null) {
 				replyBean.setReplyContent(replyContent);
-				replyBean.setReplyDate(replyDate);;
 			}
-
 			return replyBean;
 		}
 
@@ -79,6 +88,12 @@ import joyou.util.HibernateUtil;
 			return false;
 		}
 		
+		@Override
+		public ReplyBean update2(Integer replyId, Integer replyL) {
+			Session session = sessionFactory.getCurrentSession();
+			ReplyBean replyBean = session.get(ReplyBean.class, replyId);
+			return replyBean;
+		}
 		
 	}
 

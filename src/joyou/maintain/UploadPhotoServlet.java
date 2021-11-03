@@ -41,11 +41,11 @@ public class UploadPhotoServlet extends HttpServlet
 		if (!fileName.isEmpty())
 		{
 			File file = new File(
-					"C:\\WorkDataSource\\workspace\\JoYouProject\\WebContent\\img\\"
+					"C:\\share\\datasource\\SpringSource\\springworkspace\\JoYouProject\\WebContent\\img\\"
 							+ fileName);
 			String newFileName = "index" + page + ".jpg";
 			File newFile = new File(
-					"C:\\WorkDataSource\\workspace\\JoYouProject\\WebContent\\img\\"
+					"C:\\share\\datasource\\SpringSource\\springworkspace\\JoYouProject\\WebContent\\img\\"
 							+ newFileName);
 			file.renameTo(newFile);
 

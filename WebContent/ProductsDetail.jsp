@@ -90,7 +90,7 @@
 								type='hidden' name='pageNo' value='1'> <a
 								style="margin-left: 30px"
 								href="javascript:document.form1.submit();" class="primary-btn">ADD
-								TO CARD</a>
+								TO CART</a>
 						</FORM>
 
 

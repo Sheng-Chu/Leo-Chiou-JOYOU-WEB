@@ -13,7 +13,18 @@
   gtag('js', new Date());
   gtag('config', 'UA-147551111-9');
 </script>
+<script type="text/javascript">
+	
+	let number = "5";//數字依照自己頁面調整
+	let x = localStorage.getItem('foot');
+	x=x+number;
+	localStorage.setItem('foot',x);
+	
+	
+	console.log(localStorage.getItem('foot'));
 
+	
+</script>
 
 
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -44,7 +55,22 @@
 <link rel="stylesheet" href="css/slideshow.css" type="text/css">
 <!-- ▲ CSS -->
 <!-- Page Preloder -->
+<!-- Google Font -->
+<link
+	href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
+	rel="stylesheet">
 
+<!-- Css Styles -->
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+<link rel="stylesheet" href="css/nice-select.css" type="text/css">
+<link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+<link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="css/style2.css" type="text/css">
+<link rel="stylesheet" href="css/slideshowedit.css" type="text/css">
+<link rel="stylesheet" href="css/searchbar.css" type="text/css">
 <!-- ▼ JS -->
 <script src="./js/jquery.min.js"></script>
 <script src="./js/promise-6.1.0.min.js"></script>
@@ -83,7 +109,6 @@
 </script> 
 <!-- ▲ JS -->
 
-<body>
 	<jsp:include page="header.jsp" />
 	
 <div class="gwrap" style="background-color: #171e5d;">

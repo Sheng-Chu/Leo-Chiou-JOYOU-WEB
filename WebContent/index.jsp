@@ -5,7 +5,19 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="zxx">
+<script type="text/javascript">
+	let x = localStorage.getItem('foot');
+	x = x + ".";
+	localStorage.setItem('foot', x);
+	console.log(localStorage.getItem('foot'));
 
+	//將x存入資料庫 setUserFoot(int 1000, String x)
+
+	localStorage.clear();
+	let number = "1";
+	localStorage.setItem('foot', number);
+	console.log(localStorage.getItem('foot'));
+</script>
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="Ogani Template">
@@ -42,17 +54,20 @@
 		<div class="slide_viewer">
 			<div class="slide_group">
 				<div class="slide">
-					<img src="${pageContext.request.contextPath}/img/index1.jpg"
+					<img src="/img/index1.jpg"
 						style="width: 100%; height: 100%; width: 900px; height: 350px">
 				</div>
 				<div class="slide">
-					<img src="${pageContext.request.contextPath}/img/index2.jpg">
+					<img src="/img/index2.jpg"
+						style="width: 100%; height: 100%; width: 900px; height: 350px">>
 				</div>
 				<div class="slide">
-					<img src="${pageContext.request.contextPath}/img/index3.jpg">
+					<img src="/img/index3.jpg"
+						style="width: 100%; height: 100%; width: 900px; height: 350px">>
 				</div>
 				<div class="slide">
-					<img src="${pageContext.request.contextPath}/img/index4.jpg">
+					<img src="/img/index4.jpg"
+						style="width: 100%; height: 100%; width: 900px; height: 350px">>
 				</div>
 				<!-- 新增slide -->
 			</div>
@@ -82,43 +97,43 @@
 
 
 	<script type="text/javascript">
-	var xhr = new XMLHttpRequest();
+		var xhr = new XMLHttpRequest();
 
-	xhr.open("GET", "<c:url value='/orderlist.json'/>", true);
-	xhr.send();
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState == 4 && xhr.status == 200) {
+		xhr.open("GET", "<c:url value='/orderlist.json'/>", true);
+		xhr.send();
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
 
-			eight = JSON.parse(xhr.responseText);
+				eight = JSON.parse(xhr.responseText);
 
-		}
-	}
-
-	var xhr1 = new XMLHttpRequest();
-
-	xhr1.open("GET", "<c:url value='/memberlist.json'/>", true);
-	xhr1.send();
-	xhr1.onreadystatechange = function() {
-		if (xhr1.readyState == 4 && xhr1.status == 200) {
-
-			gender = JSON.parse(xhr1.responseText);
-
+			}
 		}
 
-	}
-	
-	var xhr2 = new XMLHttpRequest();
+		var xhr1 = new XMLHttpRequest();
 
-	xhr2.open("GET", "<c:url value='/footlist.json'/>", true);
-	xhr2.send();
-	xhr2.onreadystatechange = function() {
-		if (xhr2.readyState == 4 && xhr2.status == 200) {
+		xhr1.open("GET", "<c:url value='/memberlist.json'/>", true);
+		xhr1.send();
+		xhr1.onreadystatechange = function() {
+			if (xhr1.readyState == 4 && xhr1.status == 200) {
 
-			foot = JSON.parse(xhr2.responseText);
+				gender = JSON.parse(xhr1.responseText);
+
+			}
 
 		}
 
-	}
+		var xhr2 = new XMLHttpRequest();
+
+		xhr2.open("GET", "<c:url value='/footlist.json'/>", true);
+		xhr2.send();
+		xhr2.onreadystatechange = function() {
+			if (xhr2.readyState == 4 && xhr2.status == 200) {
+
+				foot = JSON.parse(xhr2.responseText);
+
+			}
+
+		}
 	</script>
 </body>
 

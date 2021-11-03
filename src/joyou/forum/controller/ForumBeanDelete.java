@@ -24,16 +24,17 @@ public class ForumBeanDelete extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	ForumBeanDAO fDAO = new ForumBeanDAOImpl();
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		Integer contentid;
-		contentid = Integer.parseInt(request.getParameter("contentId").trim());
+		contentid = Integer.parseInt(request.getParameter("contentId"));
+		System.out.println("66666:"+contentid);
 		response.setContentType("application/json; charset=UTF-8");
 		SessionFactory factory = HibernateUtil.getSessionFactory();
 		Session session = factory.getCurrentSession();
+		ForumBeanDAO fDAO = new ForumBeanDAOImpl(session);
 		session.beginTransaction();
 		PrintWriter out = response.getWriter();
 		ForumBean fBean = fDAO.select(contentid);
@@ -45,7 +46,6 @@ public class ForumBeanDelete extends HttpServlet {
 		}
 		session.getTransaction().commit();
 		out.close();
-		return;
 
 	}
 

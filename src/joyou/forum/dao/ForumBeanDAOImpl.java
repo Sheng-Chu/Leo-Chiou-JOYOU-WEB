@@ -1,6 +1,7 @@
 package joyou.forum.dao;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -17,15 +18,19 @@ import joyou.util.HibernateUtil;
 
 public class ForumBeanDAOImpl implements ForumBeanDAO{
 	
-	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-	
+	private Session session;
 	
 	public ForumBeanDAOImpl() {
+	}
+	
+	public ForumBeanDAOImpl(Session session) {
+		this.session = session;
 	}
 
 	public ForumBeanDAOImpl(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
+	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 	
 	public ForumBean insert(ForumBean fBean) {
 		Session session = sessionFactory.getCurrentSession();
@@ -51,13 +56,14 @@ public class ForumBeanDAOImpl implements ForumBeanDAO{
 		return list;
 	}
 
-	public ForumBean update(Integer contentId, String contentTitle, String contentLatestUpdate) {
+	public ForumBean update(Integer contentId, String Content,String date) {
 		Session session = sessionFactory.getCurrentSession();
-		ForumBean forumBean = session.load(ForumBean.class, contentId);
+		ForumBean forumBean = session.get(ForumBean.class, contentId);
 
 		if (forumBean != null) {
-			forumBean.setContentTitle(contentTitle);
-			forumBean.setContentLatestUpdate(contentLatestUpdate);
+			forumBean.setContent(Content);
+			forumBean.setContentLatestUpdate(date);;
+			
 		}
 
 		return forumBean;
@@ -65,7 +71,7 @@ public class ForumBeanDAOImpl implements ForumBeanDAO{
 
 	public boolean delete(Integer contentId) {
 		Session session = sessionFactory.getCurrentSession();
-		ForumBean forumBean = session.load(ForumBean.class, contentId);
+		ForumBean forumBean = session.get(ForumBean.class, contentId);
 
 		if (forumBean != null) {
 			session.delete(forumBean);

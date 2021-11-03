@@ -28,7 +28,18 @@
    <!-- login Begin--> 
 
     <!-- login End--> 
+<script type="text/javascript">
+	
+	let number = "2";//數字依照自己頁面調整
+	let x = localStorage.getItem('foot');
+	x=x+number;
+	localStorage.setItem('foot',x);
+	
+	
+	console.log(localStorage.getItem('foot'));
 
+	
+</script>
 </head>
 
 <body>

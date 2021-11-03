@@ -16,7 +16,8 @@ public class TestMail {
 	public String sendMail(String mailAddress) {
 		String host = "smtp.gmail.com";
 		int port = 587;
-		final String username = "eeit117G1@gmail.com";
+		final String username = "eeit117.joyou@gmail.com";
+//		final String username = "eeit117G1@gmail.com";
 //		final String username = "eeit117G2@gmail.com";
 		final String password = "java11736";
 

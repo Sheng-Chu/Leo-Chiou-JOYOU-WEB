@@ -3,8 +3,6 @@ package joyou;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.StringTokenizer;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,10 +13,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import joyou.Members.model.MembersBean;
-import joyou.Members.model.MembersBeanDao;
 import joyou.Members.model.MembersBeanService;
 import joyou.util.HibernateUtil;
 @WebServlet("/memberlist.json")

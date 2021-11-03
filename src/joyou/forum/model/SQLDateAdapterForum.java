@@ -19,5 +19,5 @@ public class SQLDateAdapterForum extends XmlAdapter<String, Date> {
     public Date unmarshal(String v) throws Exception {
         return Date.valueOf(v);
     }
-
+ 
 }

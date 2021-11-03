@@ -38,6 +38,19 @@ response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <link rel="stylesheet" href="css/searchbar.css" type="text/css">
 
+
+<script type="text/javascript">
+	
+	let number = "3";//數字依照自己頁面調整
+	let x = localStorage.getItem('foot');
+	x=x+number;
+	localStorage.setItem('foot',x);
+	
+	
+	console.log(localStorage.getItem('foot'));
+
+	
+</script>
 <script type="text/javascript">
 
 function modify(key, orderitemQty, index) {
@@ -221,24 +234,46 @@ function Abort() {
 							<li id="memberManage"></li>
 							<li><a href="SaleProductsGetServlet.do">揪遊商城</a></li>
 							<!--  <li><a href="ProductsGetServlet.do">揪遊商城</a> -->
-							<li><a href="ProductsGetServlet.do">討論區</a></li>
+							<li><a href="./ForumListIndex.jsp">討論區</a></li>
 							<li><a href="./groups.jsp">揪遊團</a></li>
 							<li><a href="">聯繫我們</a></li>
 						</ul>
 					</nav>
 				</div>
 				<div class="col-lg-2">
-					<div class="header__cart">
-						<ul>
-							<li><a
-								href="http://localhost:8080/JoYouProject/ShopingCartPage.jsp"><i
-									class="fa fa-shopping-bag"></i><span>${ShoppingCart.itemNumber}</span></a></li>
-						</ul>
-						<div class="header__cart__price">
+										<div class="header__cart">
 
-							<span>購物金額 $<c:out value="${ShoppingCart.subtotal}"
-									default="0" /></span>
-						</div>
+						<c:choose>
+							<c:when test="${ShoppingCart.itemNumber>0}">
+								<ul>
+									<li><a
+										href="http://localhost:8080/JoYouProject/ShopingCartPage.jsp"><i
+											class="fa fa-shopping-bag"></i><span style="display: "
+											id="bagcounts">${ShoppingCart.itemNumber}</span></a></li>
+								</ul>
+								<div class="header__cart__price">
+
+									<span style="display:" id="carttotal">購物金額 $<c:out
+											value="${ShoppingCart.subtotal}" default="0" /></span>
+								</div>
+
+							</c:when>
+							<c:otherwise>
+								<ul>
+									<li><a
+										href="http://localhost:8080/JoYouProject/ShopingCartPage.jsp"><i
+											class="fa fa-shopping-bag"></i><span style="display: none"
+											id="bagcounts">${ShoppingCart.itemNumber}</span></a></li>
+								</ul>
+								<div class="header__cart__price">
+
+									<span style="display: none" id="carttotal">購物金額 $<c:out
+											value="${ShoppingCart.subtotal}" default="0" /></span>
+								</div>
+							</c:otherwise>
+						</c:choose>
+
+
 					</div>
 				</div>
 			</div>
@@ -261,7 +296,7 @@ function Abort() {
 									找什麼 <i class="fa fa-angle-down" aria-hidden="true"></i>
 								</div>
 								<ul class="main-menu-container">
-									<li><a href="#">找文章</a></li>
+									<li><a href="<c:url value='ForumListIndex.jsp'/>">找文章</a></li>
 									<li><a href="<c:url value='/SaleProductsGetServlet.do'/>">找桌遊</a></li>
 								</ul>
 							</li>

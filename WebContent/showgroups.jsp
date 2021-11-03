@@ -1,9 +1,141 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>	
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+body {
+	background-color: #3e94ec;
+	font-size: 16px;
+	text-rendering: optimizeLegibility;
+}
+
+div.table-title {
+	display: block;
+	margin: auto;
+	max-width: 600px;
+	padding: 5px;
+	width: 100%;
+}
+
+.table-title h3 {
+	color: #fafafa;
+	font-size: 30px;
+	font-weight: 400;
+	font-style: normal;
+	font-family: "Roboto", helvetica, arial, sans-serif;
+	text-transform: uppercase;
+}
+
+/*** Table Styles **/
+.table-fill {
+	background: white;
+	border-radius: 3px;
+	border-collapse: collapse;
+	height: 320px;
+	margin: auto;
+	max-width: 600px;
+	padding: 5px;
+	width: 100%;
+	animation: float 5s infinite;
+}
+
+th {
+	color: #D5DDE5;;
+	background: #1b1e24;
+	border-bottom: 4px solid #9ea7af;
+	border-right: 1px solid #343a45;
+	font-size: 23px;
+	font-weight: 100;
+	padding: 24px;
+	text-align: left;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+	vertical-align: middle;
+}
+
+th:first-child {
+	border-top-left-radius: 3px;
+}
+
+th:last-child {
+	border-top-right-radius: 3px;
+	border-right: none;
+}
+
+tr {
+	border-top: 1px solid #C1C3D1;
+	border-bottom-: 1px solid #C1C3D1;
+	font-size: 16px;
+}
+
+tr:hover td {
+	background: #4E5066;
+	color: #FFFFFF;
+	border-top: 1px solid #22262e;
+}
+
+tr:first-child {
+	border-top: none;
+}
+
+tr:last-child {
+	border-bottom: none;
+}
+
+tr:nth-child(odd) td {
+	background: #F0F0F0;
+}
+
+tr:nth-child(odd):hover td {
+	background: #4E5066;
+}
+
+tr:last-child td:first-child {
+	border-bottom-left-radius: 3px;
+}
+
+tr:last-child td:last-child {
+	border-bottom-right-radius: 3px;
+}
+
+td {
+	background: #FFFFFF;
+	padding: 20px;
+	text-align: left;
+	vertical-align: middle;
+	font-size: 16px;
+	border-right: 1px solid #C1C3D1;
+}
+
+td:last-child {
+	border-right: 0px;
+}
+
+th.text-left {
+	text-align: left;
+}
+
+th.text-center {
+	text-align: center;
+}
+
+th.text-right {
+	text-align: right;
+}
+
+td.text-left {
+	text-align: left;
+}
+
+td.text-center {
+	text-align: center;
+}
+
+td.text-right {
+	text-align: right;
+}
+</style>
 <script>
 
 function getData() {
@@ -109,7 +241,7 @@ window.onload = function() {
 <link rel="stylesheet" href="css/searchbar.css" type="text/css">
 </head>
 <body>
-<!-- Page Preloder -->
+	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
 	</div>
@@ -197,17 +329,15 @@ window.onload = function() {
 				</div>
 				<div class="col-lg-7">
 					<nav class="header__menu">
-                        <ul>
-                             <li id="memberManage"></li>						
-                             <li><a href="SaleProductsGetServlet.do">揪遊商城</a>
-                            </li>
-                            <!--  <li><a href="ProductsGetServlet.do">揪遊商城</a> -->
-                            <li><a href="ProductsGetServlet.do">討論區</a>
-                            </li>
-                            <li><a href="./groups.jsp">揪遊團</a></li>
-                            <li><a href="./contact.html">聯繫我們</a></li>
-                        </ul>
-                    </nav>
+						<ul>
+							<li id="memberManage"></li>
+							<li><a href="SaleProductsGetServlet.do">揪遊商城</a></li>
+							<!--  <li><a href="ProductsGetServlet.do">揪遊商城</a> -->
+							<li><a href="ProductsGetServlet.do">討論區</a></li>
+							<li><a href="./groups.jsp">揪遊團</a></li>
+							<li><a href="./contact.html">聯繫我們</a></li>
+						</ul>
+					</nav>
 				</div>
 				<div class="col-lg-2">
 					<div class="header__cart">
@@ -218,8 +348,8 @@ window.onload = function() {
 						</ul>
 						<div class="header__cart__price">
 
-							<span id="carttotal">購物金額 $<c:out value="${ShoppingCart.subtotal}"
-									default="0" /></span>
+							<span id="carttotal">購物金額 $<c:out
+									value="${ShoppingCart.subtotal}" default="0" /></span>
 						</div>
 					</div>
 				</div>
@@ -275,169 +405,102 @@ window.onload = function() {
 		</div>
 	</section>
 	<!-- Hero Section End -->
-	
-<div align='center'>
+
+	<div align='center'>
 
 
 
-<font face="fantasy"  color="#FFEEDD" style="font-weight:bold;" >
 
-<div align='center' style="background-image:url(img/bg1.jpg); width: 100%;
-  height: 150%;background-size: cover;" >
-  
-  
-	<section id="news"><section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg" style="background-image: url(&quot;img/breadcrumb.jpg&quot;);">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 text-center">
-					<div class="breadcrumb__text">
-						<h2>揪團資料</h2>
-						
-						<div class="breadcrumb__option">
-							<span></span>
+		<section class="breadcrumb-section set-bg"
+			data-setbg="img/breadcrumb.jpg"
+			style="background-image: url(&quot;img/breadcrumb.jpg&quot;);">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 text-center">
+						<div class="breadcrumb__text">
+							<h2>揪團資料</h2>
+
+							<div class="breadcrumb__option">
+								<span></span>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</section>
-<div id='resultMsg' style="height: 18px; font-weight: bold;"></div>
-<hr>
-	<fieldset style='display: inline-block; width: 820px;'> 
-	<input type="hidden" name="id" id='id'><br>
-	<table border='1'>
-	<tr height='60'>
-		
-		<td width='400'>
-			&nbsp;活動編號: <label id='id0'></label><br>
-		</td>
-	</tr>
-	<tr height='60'>
-		
-		<td width='400'>
-			&nbsp;活動名稱: <label id='id1'></label><br>
-		</td>
-		
-	</tr>
-	<tr height='60'>
-	
-		<td width='400'>
-			&nbsp;遊戲類型編號: <label id='id2'></label><br>
-		</td>
-		
-	</tr>
-	<tr height='60'>		
-		
-		<td width='400'>
-			&nbsp;遊戲人數: <label id='id3'></label>
-		</td>	
-			
-	</tr>
-	<tr height='60'>		
-		
-		<td width='400'>
-			&nbsp;舉辦時間: <label id='id4'></label>
-		</td>	
-			
-	</tr>
-	<tr height='60'>		
-	
-		<td width='400'>
-			&nbsp;店家編號: <label id='id5'></label>
-		</td>	
-		
-	</tr>
-	<tr height='60'>		
-		
-		<td width='400'>
-			&nbsp;活動費用: <label id='id6'></label>
-		</td>	
-		
-	</tr>
-	<tr height='60'>		
-		
-		<td width='400'>
-			&nbsp;活動團長: <label id='id7'></label>
-		</td>	
-		
-	</tr>
-	<tr height='60'>		
-		
-		<td width='400'>
-			&nbsp;參加團員: <label id='id8'></label>
-		</td>	
-			
-	</tr>
-	<tr height='60'>		
-	
-		<td width='400'>
-			&nbsp;活動開始日期: <label id='id9'></label>
-		</td>	
-			
-	</tr>
-	<tr height='60'>		
-	
-		<td width='400'>
-			&nbsp;活動結束日期: <label id='id10'></label>
-		</td>	
-			
-	</tr>
-	<tr height='60'>		
-		
-		<td width='400'>
-			&nbsp;報名期限: <label id='id11'></label>
-		</td>	
-		
-	</tr>
-	<tr height='60'>		
-		
-		<td width='400'>
-			&nbsp;活動地點: <label id='id12'></label>
-		</td>	
-		
-	</tr>
-	<tr height='60'>		
-	
-		<td width='400'>
-			&nbsp;人數上限: <label id='id13'></label>
-		</td>	
-		
-	</tr>
-	<tr height='60'>		
-		
-		<td width='400'>
-			&nbsp;目前人數: <label id='id14'></label>
-		</td>	
-		
-	</tr>
-		
-	
-		<td width='400'>
-			&nbsp;活動描述: <label id='id15'></label>
-		</td>	
-			
-	</tr>
-		<tr height='200'>
-		<td width='400'>
-			&nbsp;活動圖片: <label id='id16'></label><br>
-		</td>
-			</tr>
+		</section>
+		<div id='resultMsg' style="height: 18px; font-weight: bold;"></div>
+
+		<fieldset style='display: inline-block; width: 820px;'>
+			<input type="hidden" name="id" id='id'><br>
+			<table style="border: 2px solid #4E5066">
+				<tr height='200'>
+					<td colspan="2" width='300'><label id='id16'></label><br>
+					</td>
+				</tr>
+				<tr height='60'>
+					<td width='300'><b>活動編號：</b><label id='id0'></label><br>
+					</td>
+					<td width='300'><b>活動名稱：</b><label id='id1'></label><br>
+					</td>
+				</tr>
+				<tr height='60'>
+					<td width='300'><b>遊戲類型：</b><label id='id2'></label><br>
+					</td>
+					<td width='300'><b>遊戲人數：</b><label id='id3'></label></td>
+				</tr>
+				<tr height='60'>
+					<td width='300'><b>舉辦時間：</b><label id='id4'></label></td>
+					<td width='300'><b>店家編號：</b><label id='id5'></label></td>
+
+				</tr>
+				<tr height='60'>
+
+					<td width='300'><b>活動費用：</b><label id='id6'></label></td>
+					<td width='300'><b>活動團長：</b><label id='id7'></label></td>
+
+				</tr>
+				<tr height='60'>
+					<td width='300'><b>參加團員：</b><label id='id8'></label></td>
+					<td width='300'><b>活動開始日期：</b><label id='id9'></label></td>
+				</tr>
+				<tr height='60'>
+
+					<td width='300'><b>活動結束日期：</b><label id='id10'></label></td>
+					<td width='300'><b>報名期限：</b><label id='id11'></label></td>
+				</tr>
+				<tr height='60'>
+					<td width='300'><b>活動地點：</b><label id='id12'></label></td>
+					<td width='300'><b>人數上限：</b><label id='id13'></label></td>
+
+				</tr>
+				<tr height='60'>
+
+					<td colspan="2" width='300'><b>目前人數：</b><label id='id14'></label>
+					</td>
+				</tr>
+
+				<tr>
+					<td colspan="2" width='300'><b>活動敘述：</b><label id='id15'></label>
+					</td>
+
+				</tr>
 			</table>
 		</fieldset>
-	<hr>	
-	<p>	
-	<form name="loginForm" method="post" action="GroupAdd">
-	<input type="submit" value="加入">
-</form>
+		<hr>
+		<p>
+		<form name="loginForm" method="post" action="GroupAdd">
+			<input type="submit" value="加入">
+			<input type="button" value="聊天室" onclick="location.href='./chat.jsp'">
+		</form>
 
-	<a href="<c:url value='/groups.jsp'  />">回活動列表</a>
-	
-<hr>
+		<a href="<c:url value='/groups.jsp'  />">回活動列表</a>
 
-</div>
-</font>
-</div>
-<footer class="footer spad">
+		<hr>
+
+	</div>
+	</font>
+	</div>
+	<footer class="footer spad">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-3 col-md-6 col-sm-6">
@@ -506,30 +569,27 @@ window.onload = function() {
 	<script src="js/mixitup.min.js"></script>
 	<script src="js/owl.carousel.min.js"></script>
 	<script src="js/main.js"></script>
-			<script>
-		<%
-			String userNickNameStr =(String) session.getAttribute("memberNickName");
-		%>
+	<script>
+		<%String userNickNameStr = (String) session.getAttribute("memberNickName");%>
 
 		var userNickName="<%=userNickNameStr%>";
-		
+
 		console.log("userNickName=");
 		console.log(userNickName);
 
-		if(userNickName=="null"){
+		if (userNickName == "null") {
 			console.log("244 is null");
-			document.getElementById("topRightLogin").style.display="";
-			document.getElementById("topRightMember").style.display="none";	
-			document.getElementById("memberManage").innerHTML="<a id='memberLogin' href='login.jsp'>會員登入</a>";	
-			
-		}else{
+			document.getElementById("topRightLogin").style.display = "";
+			document.getElementById("topRightMember").style.display = "none";
+			document.getElementById("memberManage").innerHTML = "<a id='memberLogin' href='login.jsp'>會員登入</a>";
+
+		} else {
 			console.log("248 not null");
-			document.getElementById("topRightLogin").style.display="none";
-			document.getElementById("topRightMember").style.display="";
-			document.getElementById("memberManage").innerHTML="<a href='member-profile.jsp'>會員資料</a>";
-			document.getElementById("memberManage").innerHTML+="<ul class='header__menu__dropdown'><li><a href='<c:url value="/up_MemberLogoutServlet"/>'>會員登出</a></li></ul>";			
+			document.getElementById("topRightLogin").style.display = "none";
+			document.getElementById("topRightMember").style.display = "";
+			document.getElementById("memberManage").innerHTML = "<a href='member-profile.jsp'>會員資料</a>";
+			document.getElementById("memberManage").innerHTML += "<ul class='header__menu__dropdown'><li><a href='<c:url value="/up_MemberLogoutServlet"/>'>會員登出</a></li></ul>";
 		}
 	</script>
-</body>
-
+	</ body>
 </html>

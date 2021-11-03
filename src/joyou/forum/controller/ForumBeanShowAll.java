@@ -13,6 +13,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import joyou.forum.dao.ForumBeanDAO;
 import joyou.forum.dao.ForumBeanDAOImpl;
@@ -34,7 +35,9 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
 	try(PrintWriter out = response.getWriter();) {
 		ForumBeanDAO fDAO = new ForumBeanDAOImpl();
 	List<ForumBean> fBean = fDAO.selectAll();
-	String categoriesJson = new Gson().toJson(fBean); 
+	System.out.println("37");
+	Gson gs = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+	String categoriesJson = gs.toJson(fBean); 
     out.write(categoriesJson);
     session.getTransaction().commit();
     out.close();

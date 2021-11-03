@@ -2,6 +2,8 @@ package joyou.forum.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -14,10 +16,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import joyou.forum.dao.ForumBeanDAO;
 import joyou.forum.dao.ForumBeanDAOImpl;
 import joyou.forum.model.ForumBean;
+import joyou.forum.model.ReplyBean;
 import joyou.util.HibernateUtil;
 
 @WebServlet("/UpdateForumServlet")
@@ -25,26 +29,26 @@ public class ForumBeanUpdate extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	ForumBeanDAO fDAO = new ForumBeanDAOImpl();
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		Integer contentid;
-		String contenttitle;
-		String contentlatestupdate;
-		contentid = Integer.parseInt(request.getParameter("contentId").trim());
-		contenttitle = request.getParameter("contentTitle").trim();
-		contentlatestupdate = request.getParameter("contentLatestUpdate").trim();
-		response.setContentType("application/json; charset=utf-8");
 		SessionFactory factory = HibernateUtil.getSessionFactory();
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
-		PrintWriter out = response.getWriter();
-		ForumBean fBean = fDAO.update(contentid, contenttitle, contentlatestupdate);
-		String categoriesJson = new Gson().toJson(fBean); 
-	    out.write(categoriesJson);
+		
+		
+		
+		Integer contentid = (Integer) request.getSession().getAttribute("fId");
+		String content = request.getParameter("Content");
+		ForumBeanDAO fDAO = new ForumBeanDAOImpl(session);
+		Date today = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String date = sdf.format(today);
+		
+
+		fDAO.update(contentid, content,date);
+	    request.getRequestDispatcher("ForumListIndex.jsp").forward(request, response);
 	    session.getTransaction().commit();
-	    out.close();
 }
 }

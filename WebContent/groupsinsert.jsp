@@ -145,7 +145,7 @@ window.onload = function() {
 			"gametypeId": gametypeIdValue,
 			"groupCount": groupCountValue,
 			"groupTime": groupTimeValue, 	
-			"storeId": storeIdValue,
+		
 			"groupprice": grouppriceValue,
 			"startdate": startdateValue,
 			"enddate": enddateValue,
@@ -159,7 +159,7 @@ window.onload = function() {
 		xhr1.setRequestHeader("Content-Type",
 		"application/x-www-form-urlencoded");
 xhr1.send("groupname=" + groupnameValue + "&gametypeId=" + gametypeIdValue
-		+ "&groupCount=" + groupCountValue+"&groupTime="+groupTimeValue+"&storeId="+storeIdValue+"&groupprice="+grouppriceValue+
+		+ "&groupCount=" + groupCountValue+"&groupTime="+groupTimeValue+"&groupprice="+grouppriceValue+
 		"&startdate="+startdateValue+"&enddate="+enddateValue+"&deadline="+deadlineValue+"&storeAddress="+storeAddressValue+"&limit="+limitValue+"&groupdescription="+groupdescriptionValue);
 	
    
@@ -297,6 +297,7 @@ xhr1.send("groupname=" + groupnameValue + "&gametypeId=" + gametypeIdValue
 	
 
 }
+  
    $(document).ready(function() {
    	$("#previewImage").hide();
        $("#imageFile").change(function() {
@@ -346,9 +347,44 @@ function dateValidation(str) {
 	  return valid;
 	}
 
-	function isEmail(email) {
-		return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
-	}
+
+	
+}
+function inputData(){
+
+    document.getElementsByName("groupname")[0].value="月下狼人殺";
+    document.getElementsByName("groupCount")[0].value="11";
+    document.getElementsByName("storeAddress")[0].value="台北市大安區忠孝東路四段15號2樓之3";
+    document.getElementsByName("limit")[0].value="15";
+//     document.getElementsByName("storeId")[0].value="9999";
+    document.getElementsByName("groupprice")[0].value="60";
+    document.getElementsByName("groupTime")[0].value="2020-10-09";
+    document.getElementsByName("startdate")[0].value="2020-10-09";
+    document.getElementsByName("enddate")[0].value="2020-10-12";
+    document.getElementsByName("deadline")[0].value="2020-10-10";
+    document.getElementsByName("gametypeId")[0].value="5001";
+    document.getElementsByName("groupdescription")[0].value="我們約在貓咪貓咪6s東區旗艦店玩狼人殺吧";
+
+    document.getElementsByName("groupname")[0].onchange();
+    document.getElementsByName("groupCount")[0].onchange();
+    document.getElementsByName("storeAddress")[0].onchange();
+    document.getElementsByName("limit")[0].onchange();
+    document.getElementsByName("storeId")[0].onchange();
+    document.getElementsByName("groupprice")[0].onchange();
+    document.getElementsByName("groupTime")[0].onchange();
+    document.getElementsByName("startdate")[0].onchange();
+    document.getElementsByName("enddate")[0].onchange();
+    document.getElementsByName("deadline")[0].onchange();
+    document.getElementsByName("gametypeId")[0].onchange();
+    document.getElementsByName("groupdescription")[0].onchange();
+    
+    document.getElementsByName("userAccount")[0].onchange();
+    document.getElementsByName("userPassword")[0].onchange();
+    document.getElementsByName("userPassword2")[0].onchange();
+    document.getElementsByName("userNickName")[0].onchange();
+    document.getElementsByName("userTrueName")[0].onchange();
+    document.getElementsByName("userPhone")[0].onchange();
+    
 }
 </script>
 <link rel="stylesheet" type="text/css"
@@ -357,10 +393,8 @@ function dateValidation(str) {
 <title>Registration</title>
 </head>
 <body>
-<font  color="#FFEEDD" face="fantasy" style="font-weight:bold;" >
 
-<div align='center' style="background-image:url(img/bg1.jpg); width: 100%;
-  height: 150%;background-size: cover;" >
+<div align="center">
 <section id="news"><section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg" style="background-image: url(&quot;img/breadcrumb.jpg&quot;);">
 		<div class="container">
 			<div class="row">
@@ -376,33 +410,90 @@ function dateValidation(str) {
 			</div>
 		</div>
 	</section>
-<fieldset style='display: inline-block; width: 820px;'> 
+	</section>
 		
 
 
 
 
-
+<div>
 <div id='resultMsg' style="height: 18px; font-weight: bold;"></div>
 	
 	<fieldset style='display: inline-block; width: 820px;'> 
-	<legend >填寫下列資料</legend>
 	<form action="GroupsInsert" enctype="multipart/form-data" method="post">
-	<table style="border=1;" >
+	<table style="border: 2px solid #7B7B7B" >
+	<tr height='40'><td colspan="3"></tr>
 	<tr height='60'>
-		<td width='400' rowspan="13">
+		<td  width='100' rowspan="13">
 		 &nbsp;</td>
-		<td width='400'>
-			&nbsp;活動標題: <input type="text" name="groupname" id='groupname'><br>
+		<td width='310'>
+			<b>活動標題：</b> <input type="text" name="groupname" id='groupname' size='24'><br>
 		</td>
-		<td width='400' rowspan="13">
+		<td width='100' rowspan="13">
 			
 		</td>	
 	</tr>
+	<tr height='60'>		
+		
+		<td width='310'>
+			<b>遊戲人數：</b><input type="text" name="groupCount" id='groupCount' size='24'>
+		</td>	
+			
+	</tr>
+	<tr height='60'>		
+		
+		<td width='310'>
+			<b>活動地點：</b><input type="text" name="storeAddress" id='storeAddress' size='24'>
+		</td>	
+			
+	</tr>
+		<tr height='60'>		
+		
+		<td width='310'>
+			<b>人數上限：</b><input type="text" name="limit" id='limit' size='24'>
+		</td>	
+			
+
+		<tr height='60'>		
+		
+		<td width='310'>
+			<b>活動費用：</b><input type="text" name="groupprice" id='groupprice' size='24'>
+		</td>	
+			
+	</tr>
+	</tr>
+		<tr height='60'>		
+		
+		<td width='310'>
+			<b>舉辦時間：</b><input type="date" name="groupTime" id='groupTime' size='24'>
+		</td>	
+		
+	</tr>
 	<tr height='60'>
 		
-		<td width='400'>
-			&nbsp;遊戲類型編號: <select class="select" name="gametypeId" id="gametypeId">
+		<td width='310'>
+			<b>活動開始時間：</b><input type="date" name="startdate" id='startdate'><br>
+		</td>
+			
+	</tr>
+	<tr height='60'>		
+		
+		<td width='310'>
+			<b>活動結束時間：</b><input type="date" name="enddate" id='enddate' size='24'>
+		</td>	
+	
+	</tr>
+		<tr height='60'>		
+		
+		<td width='310'>
+			<b>報名期限：</b><input type="date" name="deadline" id='deadline' size='24'>
+		</td>	
+		
+	</tr>
+	<tr height='60'>
+		
+		<td width='310'>
+			<b>遊戲類型：</b><select class="select" name="gametypeId" id="gametypeId">
 		<option value="5001">PartyGames</option>
 		<option value="5002">StrategyGames</option>
 		<option value="5003">ThemeticGames</option>
@@ -415,90 +506,32 @@ function dateValidation(str) {
 		</td>
 			
 	</tr>
-	<tr height='60'>		
-		
-		<td width='400'>
-			&nbsp;遊戲人數: <input type="text" name="groupCount" id='groupCount' size='24'>
-		</td>	
-			
-	</tr>
-		<tr height='60'>		
-		
-		<td width='400'>
-			&nbsp;舉辦時間: <input type="date" name="groupTime" id='groupTime' size='24'>
-		</td>	
-		
-	</tr>
-		<tr height='60'>		
-		
-		<td width='400'>
-			&nbsp;店家編號: <input type="text" name="storeId" id='storeId' size='24'>
-		</td>	
-			
-	</tr>
-		<tr height='60'>		
-		
-		<td width='400'>
-			&nbsp;活動費用: <input type="text" name="groupprice" id='groupprice' size='24'>
-		</td>	
-			
-	</tr>
-	<tr height='60'>
-		
-		<td width='400'>
-			&nbsp;活動開始日期: <input type="date" name="startdate" id='startdate'><br>
-		</td>
-			
-	</tr>
-	<tr height='60'>		
-		
-		<td width='400'>
-			&nbsp;活動結束日期: <input type="date" name="enddate" id='enddate' size='24'>
-		</td>	
-	
-	</tr>
-		<tr height='60'>		
-		
-		<td width='400'>
-			&nbsp;報名期限: <input type="date" name="deadline" id='deadline' size='24'>
-		</td>	
-		
-	</tr>
-		<tr height='60'>		
-		
-		<td width='400'>
-			&nbsp;活動地點: <input type="text" name="storeAddress" id='storeAddress' size='24'>
-		</td>	
-			
-	</tr>
-		<tr height='60'>		
-		
-		<td width='400'>
-			&nbsp;人數上限: <input type="text" name="limit" id='limit' size='24'>
-		</td>	
-			
-	</tr>
 			<tr height='60'>		
 		
-		<td width='400'>
-			&nbsp;活動描述: <textarea type="text" name="groupdescription" id='groupdescription'   rows='5' rows='6'></textarea>
+		<td width='310'>
+			<b>活動介紹：</b><br/><textarea type="text" name="groupdescription" id='groupdescription'   cols='40' rows='6'></textarea>
 		</td>	
 		
 	</tr>
 	<tr height='60'>	
 	
 	<td width='200'>
-		<label for="imageFile">上傳圖片</label> 
-		<input type="file" id="imageFile" name="imageFile" accept="image/jpeg" />
+		<b>圖片上傳：</b>
+		<input type="file" id="imageFile" name="imageFile" accept="image/gif, image/jpeg, image/png"	 />
 </td>	
-
-
+</tr>
+<tr height='100'>
+	<td  width='310'>
+                        <img id="preview_progressbarTW_img"  src="img/logo.png" />
+                        </td>
 </tr>
 	<tr height='50'>		
 		<td colspan='3' align='center'><button id='sendData'>送出</button></td>
 	</tr>		
+	  
 			</table>
 			</form>
+			<input type="button" value="測試用按鈕" onClick="inputData()" />
 		</fieldset>
 	<hr>	
 	<p>	
@@ -514,7 +547,7 @@ function dateValidation(str) {
 
 
 </div>
-</font>
+</div>
 <footer class="footer spad">
 		<div class="container">
 			<div class="row">
@@ -572,5 +605,43 @@ function dateValidation(str) {
 			</div>
 		</div>
 	</footer>
+	<script>
+
+$("#imageFile").change(function(){
+
+  readURL(this);
+
+});
+
+ 
+
+function readURL(input){
+
+  if(input.files && input.files[0]){
+
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+
+       $("#preview_progressbarTW_img").attr('src', e.target.result);
+
+    }
+
+    reader.readAsDataURL(input.files[0]);
+
+  }
+
+}
+
+</script>
+<head>
+		<tr height='60'>		
+		
+		<td width='310'>
+			<b>店家編號：</b><input type="text" name="storeId" id='storeId' size='24'>
+		</td>	
+			
+	</tr>
+	</head>
 </body>
 </html>

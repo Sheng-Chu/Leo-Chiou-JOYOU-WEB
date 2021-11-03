@@ -114,6 +114,23 @@ function sub() {
 
 }
 
+function checkName(){
+	let xhr = new XMLHttpRequest();
+	var selectElement = document.getElementById('code');
+	var Msg = document.getElementById('disMsg');
+	xhr.open("POST", "<c:url value='/DiscountsCheckServlet.do?' />", true);
+	xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	xhr.send("discountName=" + selectElement.value);
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			let result = JSON.parse(xhr.responseText);
+			Msg.innerHTML = "<span>" + result.disMsg + "</span>";
+		}
+	}
+	
+	
+}
+
 
 </script>
 </head>
@@ -223,10 +240,10 @@ function sub() {
 											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 												<div class="review-content-section">
 													<form id="disadd" method="post">
-														<div class="input-group mg-b-pro-edt">
+<div class="input-group mg-b-pro-edt" style="width: 279.5px">
 															<span> 折扣代碼：</span> <input type="text" id="code"
-																class="form-control" value="${upCode}"/>
-														</div>
+																class="form-control" onchange="checkName()" value="${upCode}"/>
+														<span style="margin-left:120px;color:red" id="disMsg" ></span></div>
 														<div class="input-group mg-b-pro-edt">
 															<span> 折扣金額(元)：</span> <input type="text" id="amount1"
 																class="form-control" value="${upAmount}"/>

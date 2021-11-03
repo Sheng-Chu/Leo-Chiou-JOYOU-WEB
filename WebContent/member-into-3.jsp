@@ -31,6 +31,7 @@
 		function checkConsistency(){
 			if(document.getElementsByName("verified")[0].value=="${VerifiedCode}"){
 				document.getElementById("checkMailCode").innerHTML="驗證碼正確";
+				document.getElementById("btn_submit").style.background="blue";
 			}
 		}
     </script>
@@ -77,7 +78,10 @@
                                         <!--以確保重大通知皆可正確送達，以維護您的權益！-->
                                     </div>
                                     <div><input type="text" value="" placeholder="四位數字驗證碼" name="verified" onChange="checkConsistency()"/><span id="checkMailCode"></span></div>
-                                    <div><a href="member-into-4.jsp"><input type="button" value="下一頁" /></a></div>
+
+                                    <div class="SB_MemberClause_btn jooshop_btn_color">
+                <a href="member-into-4.jsp"><input name="btn_submit" id="btn_submit" value="完成註冊" type="submit"></a><!---->
+            </div>
                                 </div>
 			
                             </div>
@@ -104,7 +108,7 @@
 
 
     <script>
-    
+    	document.getElementById("btn_submit").style.background="grey";
     	
         <% 
        

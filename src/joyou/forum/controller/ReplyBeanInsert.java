@@ -2,7 +2,10 @@ package joyou.forum.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -16,6 +19,7 @@ import org.hibernate.SessionFactory;
 
 import com.google.gson.Gson;
 
+import joyou.Members.model.MembersBeanDao;
 import joyou.forum.dao.ForumBeanDAOImpl;
 import joyou.forum.dao.ReplyBeanDAO;
 import joyou.forum.dao.ReplyBeanDAOImpl;
@@ -26,7 +30,11 @@ import joyou.util.HibernateUtil;
 @WebServlet("/InsertReplyServlet")
 public class ReplyBeanInsert extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request,response);
+	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -41,23 +49,32 @@ public class ReplyBeanInsert extends HttpServlet {
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
 
-		System.out.println(out);
 		String replyContent = request.getParameter("replyContent");
-		System.out.println(request.getParameter("replyContent"));
-//		Integer replyId = Integer.parseInt(request.getParameter("replyId"));
-//		Integer contentId = Integer.parseInt(request.getParameter("Content"));
-//		String replyDate = request.getParameter("replyDate");
-//		Integer memberId = Integer.parseInt(request.getParameter("memberId"));
-//		String memberNickName = request.getParameter("memberNickName");
+		int contentId = (int)request.getSession().getAttribute("fId");
+		Integer memberId = (int)request.getSession().getAttribute("memberID");
+		MembersBeanDao mDao = new MembersBeanDao(session);
+		String memberNickName = mDao.getMemberById(memberId).getNickName();
+		String imageFileName = mDao.getMemberById(memberId).getImageFileName();
+		
+		Date today = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String date = sdf.format(today);
+		
+		
 		
 		
 
-		ReplyBean rBean = new ReplyBean(null, replyContent, null, null, null);
-
-		ReplyBeanDAO rDAO = new ReplyBeanDAOImpl();
-
-		rDAO.reply(rBean);
-		session.getTransaction().commit();
+		ReplyBean rBean = new ReplyBean(null,replyContent, date, memberId, memberNickName,imageFileName);
+		
+		ForumBeanDAOImpl fDao = new ForumBeanDAOImpl();
+		ReplyBeanDAOImpl rDao = new ReplyBeanDAOImpl(session);
+		ForumBean fBean = fDao.select(contentId);
+		rBean.setforumBean(fBean);
+		rDao.reply(rBean);
+		
+		
+		
+		
 		Map<String, String> map = new HashMap<>();
 		map.put("success", "回復文章成功");
 		out.println(gson.toJson(map));

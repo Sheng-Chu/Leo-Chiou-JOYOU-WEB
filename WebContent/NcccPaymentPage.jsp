@@ -82,7 +82,9 @@ function setConf(){
 <body onload="document.HPP.submit();">
 
 
-	<jsp:include page="header.jsp" />	
+	<jsp:include page="header.jsp" />
+	<div><a href='${pageContext.request.contextPath}/ProcessOrderServlet.do'>跳過</a></div>
+		
 
 
 

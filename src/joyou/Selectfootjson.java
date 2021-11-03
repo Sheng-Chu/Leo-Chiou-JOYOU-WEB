@@ -15,10 +15,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import joyou.Members.model.MembersBean;
-import joyou.Members.model.MembersBeanDao;
 import joyou.Members.model.MembersBeanService;
 import joyou.util.HibernateUtil;
 @WebServlet("/footlist.json")

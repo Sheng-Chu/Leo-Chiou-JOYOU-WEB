@@ -33,6 +33,8 @@ public class GroupsShowjson extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		Integer groupid;
 		groupid = Integer.parseInt(request.getParameter("groupId").trim());
+		request.getSession().setAttribute("groupid", groupid);
+		System.out.println("現在選擇"+(Integer) request.getSession().getAttribute("groupid"));
 	    response.setContentType("application/json; charset=utf-8");
 		SessionFactory factory = HibernateUtil.getSessionFactory();
 		Session session = factory.getCurrentSession();

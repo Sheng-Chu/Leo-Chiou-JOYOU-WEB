@@ -25,9 +25,8 @@ public class ReplyBeanDelete extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	ReplyBeanDAO rDAO = new ReplyBeanDAOImpl();
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		Integer replyid;
@@ -35,6 +34,7 @@ public class ReplyBeanDelete extends HttpServlet {
 		response.setContentType("application/json; charset=UTF-8");
 		SessionFactory factory = HibernateUtil.getSessionFactory();
 		Session session = factory.getCurrentSession();
+		ReplyBeanDAO rDAO = new ReplyBeanDAOImpl(session);
 		session.beginTransaction();
 		PrintWriter out = response.getWriter();
 		ReplyBean rBean = rDAO.select(replyid);
@@ -46,7 +46,6 @@ public class ReplyBeanDelete extends HttpServlet {
 		}
 		session.getTransaction().commit();
 		out.close();
-		return;
 
 	}
 

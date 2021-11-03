@@ -12,11 +12,81 @@
     <meta name="keywords" content="Ogani, unica, creative, html" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Ogani | Template</title>
+    <title>好友資料</title>
     <script
       type="text/javascript"
       src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"
     ></script>
+        <script type="text/javascript">
+	window.onload = function() {
+	
+		var inputValue = document.getElementById('TestGameTypeTxt');
+		var searchxhr = new XMLHttpRequest();
+
+
+		var xhr2 = new XMLHttpRequest();
+
+
+		inputValue.onclick = function() {
+			//				window.alert(999);
+			searchxhr.onreadystatechange = function() {
+				if (searchxhr.readyState == 4 && searchxhr.status == 200) {
+					displaySearchProducts(searchxhr.responseText);
+				}
+			}
+			searchxhr.open("GET",
+					"<c:url value='/FriendsRecommendServlet.do' />"
+							+ "?TestGameTypeTxt=" + inputValue.value, true);
+			searchxhr.send();
+		}
+
+
+
+
+		function displaySearchProducts(searchresponseData) {
+
+			var content = "<div class='row'></div>";
+			var data = searchresponseData.split("&&&");
+			var RecommendFriends = JSON.parse(data[0]);
+
+			for (var i = 0; i < RecommendFriends.length; i++) {
+
+				content += '<div class="col-4 col-md-4 col-lg-4 col-xxl-2 mb-1" style="float: left;">';
+				content += '<div class="bg-white p-3 h-100">';
+				content += "<a href='${pageContext.request.contextPath}/ShowSingalFriendServlet.do?"
+						+ "imageFileName="
+						+ RecommendFriends[i].imageFileName
+						+ "&id="
+						+ RecommendFriends[i].id
+						+ "&nickname="
+						+ RecommendFriends[i].nickname
+						+ "&mail="
+						+ RecommendFriends[i].mail
+						+ "&phone="
+						+ RecommendFriends[i].phone
+						+ "&gender="
+						+ RecommendFriends[i].gender
+						+ "&preferGameType="
+						+ RecommendFriends[i].preferGameType + "'>"
+				content += "<img class='img-thumbnail img-fluid rounded-circle mb-3 shadow-sm' src='up_NoUsed/"+RecommendFriends[i].imageFileName+"'alt='' width='100' /></a>";
+				content += '<div class="primary-btn" style="background: #FFFFFF;vertical-align: middle;">';
+				content += '<p style="font-size: 16px ;line-height: 10px;">性別:</p>';
+				content += '<p style="font-size: 16px ;line-height: 10px;">'
+						+ RecommendFriends[i].gender + '</p>';
+				content += '</div>';
+				content += '<h4 class="mb-1">' + RecommendFriends[i].nickname
+						+ '</h4>';
+				content += '</div>';
+				content += '</div>';
+
+			}
+			document.getElementById("pageProduct").innerHTML = content;
+		}
+
+	}
+
+
+</script>
 
     <!-- Google Font -->
     <link
@@ -63,109 +133,77 @@
               <div class="product__details__pic__item">
                 <img
                   class="product__details__pic__item--large"
-                  src="img/friendstest/friendtest02.jpg"
-                  alt=""
-                />
+                  src="up_NoUsed/${picturepath}"/>
               </div>
             </div>
           </div>
           <div class="col-lg-6 col-md-6">
             <div class="product__details__text">
-              <h3><font color="black">大象</font></h3>
+              <h3><font color="black">${nickname}</font></h3>
+              <div class="frienddata">
+               		 ID:
+                <div class="datacontent">${friends_numbs}</div>
+              </div>
               <div class="frienddata">
                		 性別:
-                <div class="datacontent">男</div>
+                <div class="datacontent">${gender}</div>
               </div>
               <div class="frienddata">
                 	遊戲偏好:
-                <div class="datacontent">Partygames</div>
+                <div class="datacontent">${typeName}</div>
               </div>
               <div class="frienddata">
                		 信箱:
-                <div class="datacontent">Laishengchu2@google.com</div>
+                <div class="datacontent">${mail}</div>
               </div>
               <br />
-              <a href="javascript:document.form1.submit();" class="primary-btn" style="background: gray;"
-                ><i class="fa fa-plus"></i>&nbsp; 已是好友</a
-              >&nbsp;
-            </div>
+              <form action="<c:url value='/FriendsDelete.do'/>" method="post" enctype="multipart/form-data">
+			  	<div class="input-group mg-b-pro-edt">
+					<input type="text" name="memID" class="form-control" value="${friends_numbs}" style="display:none"/>
+				</div>
+				<button type="submit" name="Submit" class="primary-btn" style="color: #AE0000;background: gray;">
+					<i class="fa fa-plus"></i>刪除好友
+				</button>
+				<p>
+					<span>${InsertMsg}</span>
+				</p>
+			</form>
           </div>
-          <div class="col-lg-12"></div>
+         
         </div>
       </div>
     </section>
     <!-- Product Details Section End -->
 
     <!-- Related Product Section Begin -->
-    <section class="related-product">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="section-title related__product__title">
-              <h2>推薦好友</h2>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="bg-white p-3 h-100">
-              <a href="FriendDetail07.jsp"
-                ><img
-                  class="img-thumbnail img-fluid rounded-circle mb-3 shadow-sm"
-                  src="img/friendstest/friendtest07.jpg"
-                  alt=""
-                  width="100"
-              /></a>
-              <h4 class="mb-1">
-                <a href="FriendDetail07.jsp"><font color="black">無奈</font></a>
-              </h4>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="bg-white p-3 h-100">
-              <a href="FriendDetail08.jsp"
-                ><img
-                  class="img-thumbnail img-fluid rounded-circle mb-3 shadow-sm"
-                  src="img/friendstest/friendtest08.jpg"
-                  alt=""
-                  width="100"
-              /></a>
-              <h4 class="mb-1">
-                <a href="FriendDetail08.jsp"><font color="black">皮卡皮卡</font></a>
-              </h4>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="bg-white p-3 h-100">
-              <a href="FriendDetail09.jsp"
-                ><img
-                  class="img-thumbnail img-fluid rounded-circle mb-3 shadow-sm"
-                  src="img/friendstest/friendtest09.jpg"
-                  alt=""
-                  width="100"
-              /></a>
-              <h4 class="mb-1">
-                <a href="FriendDetail09.jsp"><font color="black">汪醬</font></a>
-              </h4>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="bg-white p-3 h-100">
-              <a href="FriendDetail10.jsp"
-                ><img
-                  class="img-thumbnail img-fluid rounded-circle mb-3 shadow-sm"
-                  src="img/friendstest/friendtest10.jpg"
-                  alt=""
-                  width="100"
-              /></a>
-              <h4 class="mb-1">
-                <a href="FriendDetail10.jsp"><font color="black">豬豬</font></a>
-              </h4>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+        <section class="container">
+      	<div class="product__discount">
+			<div class="section-title product__discount__title">
+				<h2>推薦好友</h2>
+			</div>
+		</div>
+		<div class="filter__item">
+			<div class="row">
+				<div class="col-lg-4 col-md-5">
+					<input id="TestGameTypeTxt" type="button" value="重新推薦"
+						style="font-weight: bold; width: 80px; height: 30px; border: none; background-color: #FFD306">
+				</div>
+				<div class="col-lg-4 col-md-4">
+					<div class="filter__found"></div>
+				</div>
+				<div class="col-lg-4 col-md-3">
+					<div class="filter__option">
+						<span class="icon_grid-2x2"></span> <span class="icon_ul"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	<div class="row" id="pageProduct">
+						<!--推薦好友清單 -->
+
+<!-- 						</div> -->
+</div>
+</section>
     <!-- Related Product Section End -->
 
     <!-- Footer Section Begin -->

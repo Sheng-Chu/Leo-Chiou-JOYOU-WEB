@@ -156,7 +156,7 @@ public class ProductsInsertServlet extends HttpServlet {
 		InputStream isImg = Img.getBinaryStream();
 		byte[] bs = new byte[isImg.available()];
 		isImg.read(bs);
-		FileOutputStream fos=new FileOutputStream("C:\\WorkDataSource\\workspace\\JoYouProject\\WebContent\\img\\"+imgName+"");
+		FileOutputStream fos=new FileOutputStream("C:\\share\\datasource\\SpringSource\\springworkspace\\JoYouProject\\WebContent\\img\\"+imgName+"");
 //		FileOutputStream fos=new FileOutputStream("C:\\WorkDataSource\\workspace\\JoYouProject\\WebContent\\img\\"+imgName+"");
 		fos.write(bs);
 		fos.close();

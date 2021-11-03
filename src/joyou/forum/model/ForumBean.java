@@ -2,10 +2,12 @@ package joyou.forum.model;
 
 import java.sql.Date;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.google.gson.annotations.Expose;
 
 import joyou.Orders.model.OrderItemBean;
 
@@ -22,47 +25,54 @@ public class ForumBean {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Expose
 	Integer contentId;
-	
-	Integer gameTypeId;
-	
+	@Expose
 	String contentTitle;
-	
+	@Expose
 	String Content;
-	
-	Integer replyId;
-	
-	String contentType;
-	
+	@Expose
 	String contentDate;
-	
+	@Expose
 	String contentLatestUpdate;
-	
+	@Expose
 	Integer memberId;
-	
+	@Expose
 	String memberNickName;
+	@Expose
+	String imageFileName;
 	
+	
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="forumBean", cascade=CascadeType.ALL)
+	Set<ReplyBean> cl = new LinkedHashSet<ReplyBean>();
+
+
 	public ForumBean() {
 		
 	}
 	
-//	@OneToMany(mappedBy="ForumBean", cascade=CascadeType.ALL)
-//	Set<ForumBean> items = new LinkedHashSet<>();
-//	String remarks;
-
-	
-	public ForumBean(Integer contentId, Integer gameTypeId, String contentTitle, String Content, String contentType, String contentDate, String contentLatestUpdate, Integer memberId, String memberNickName ) {
-		
+	public ForumBean(Integer contentId, String contentTitle, String Content, String contentDate, String contentLatestUpdate, Integer memberId, String memberNickName,Set<ReplyBean> cl) {
 		this.contentId = contentId;
-		this.gameTypeId = gameTypeId;
 		this.contentTitle = contentTitle;
 		this.Content = Content;
-		this.replyId = replyId;
-		this.contentType = contentType;
 		this.contentDate = contentDate;
 		this.contentLatestUpdate = contentLatestUpdate;
 		this.memberId = memberId;
 		this.memberNickName = memberNickName;
+		this.cl = cl;
+	}
+	
+	public ForumBean(Integer contentId, String contentTitle, String Content, String contentDate, String contentLatestUpdate, Integer memberId, String memberNickName, String imageFileName) {
+		
+		this.contentId = contentId;
+		this.contentTitle = contentTitle;
+		this.Content = Content;
+		this.contentDate = contentDate;
+		this.contentLatestUpdate = contentLatestUpdate;
+		this.memberId = memberId;
+		this.memberNickName = memberNickName;
+		this.imageFileName = imageFileName;
 	}
 
 	public Integer getContentId() {
@@ -73,13 +83,6 @@ public class ForumBean {
 		this.contentId = contentId;
 	}
 
-	public Integer getGameTypeId() {
-		return gameTypeId;
-	}
-
-	public void setGameType(Integer gameType) {
-		this.gameTypeId = gameType;
-	}
 
 	public String getContentTitle() {
 		return contentTitle;
@@ -95,22 +98,6 @@ public class ForumBean {
 
 	public void setContent(String Content) {
 		this.Content = Content;
-	}
-
-	public Integer getReplyId() {
-		return replyId;
-	}
-
-	public void setReplyId(Integer replyId) {
-		replyId = replyId;
-	}
-
-	public String getContentType() {
-		return contentType;
-	}
-
-	public void setContentType(String contentType) {
-		this.contentType = contentType;
 	}
 
 	public String getContentDate() {
@@ -144,31 +131,22 @@ public class ForumBean {
 	public void setMemberNickName(String memberNickName) {
 		this.memberNickName = memberNickName;
 	}
-	
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Fourm [contentId=");
-		builder.append(contentId);
-		builder.append(", gameTypeId=");
-		builder.append(gameTypeId);
-		builder.append(", contentTitle=");
-		builder.append(contentTitle);
-		builder.append(", Content=");
-		builder.append(Content);
-		builder.append(", replyId=");
-		builder.append(replyId);
-		builder.append(", contentType=");
-		builder.append(contentType);
-		builder.append(", contentDate=");
-		builder.append(contentDate);
-		builder.append(", contentLatestDate=");
-		builder.append(contentLatestUpdate);
-		builder.append(", memberId=");
-		builder.append(memberId);
-		builder.append(", memberNickName");
-		builder.append(memberNickName);
-		builder.append("]");
-		return builder.toString();
+
+	public Set<ReplyBean> getCl() {
+		return cl;
 	}
+
+	public void setCl(Set<ReplyBean> cl) {
+		this.cl = cl;
+	}
+
+	public String getImageFileName() {
+		return imageFileName;
+	}
+
+	public void setImageFileName(String imageFileName) {
+		this.imageFileName = imageFileName;
+	}
+
+
 }

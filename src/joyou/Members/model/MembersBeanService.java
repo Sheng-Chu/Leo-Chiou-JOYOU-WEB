@@ -59,6 +59,14 @@ public class MembersBeanService {
 		return null;
 	}
 	
+	public MembersBean getMemberByMail(String mailbox) {
+		if (mailbox != null && mailbox.length() != 0) {
+			MembersBean bean = memberDao.getMemberByMail(mailbox);
+			return bean;
+		}
+		return null;
+	}
+	
 
 	public List<MembersBean> getAllMembers() {
 		return memberDao.getAllMembers();

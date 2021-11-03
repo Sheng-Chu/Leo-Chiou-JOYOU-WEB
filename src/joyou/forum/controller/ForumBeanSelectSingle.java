@@ -1,6 +1,6 @@
 package joyou.forum.controller;
 
-import java.io.IOException;
+import java.io.IOException; 
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -14,6 +14,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import joyou.forum.dao.ForumBeanDAO;
 import joyou.forum.dao.ForumBeanDAOImpl;
@@ -30,15 +31,18 @@ public class ForumBeanSelectSingle extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		Integer contentid;
-		contentid = Integer.parseInt(request.getParameter("contentId").trim());
 		response.setContentType("application/json; charset=utf-8");
 		SessionFactory factory = HibernateUtil.getSessionFactory();
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
+		
+		int contentid = Integer.parseInt(request.getParameter("contentId"));
+		request.getSession().setAttribute("fId", contentid);
+		
 		PrintWriter out = response.getWriter();
 		ForumBean fBean = fDAO.select(contentid);
-		String categoriesJson = new Gson().toJson(fBean);
+		Gson gs = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		String categoriesJson = gs.toJson(fBean);
 		out.write(categoriesJson);
 		session.getTransaction().commit();
 		

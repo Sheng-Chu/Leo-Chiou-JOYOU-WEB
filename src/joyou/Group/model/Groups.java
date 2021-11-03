@@ -23,7 +23,7 @@ public class Groups {
 	 Integer storeId;
 	 Integer groupprice;
 	 Integer memberID;
-	 Integer groupmember;
+	 String groupmember;
 	  String startdate;
 	  String enddate;
 	  String deadline;
@@ -31,10 +31,11 @@ public class Groups {
 	 Integer limit;	
 	 Integer groupnumber;
 	 String groupdescription;
+		String gphotoName;
 	public Groups() {
 	}
 
-	public Groups(Integer groupId, String groupname,Integer gametypeId,Integer groupCount,String groupTime,Integer storeId,Integer groupprice,Integer memberID,Integer groupmember,String startdate,String enddate,String deadline,String storeAddress,Integer limit,Integer groupnumber,String groupdescription) {
+	public Groups(Integer groupId, String groupname,Integer gametypeId,Integer groupCount,String groupTime,Integer storeId,Integer groupprice,Integer memberID,String groupmember,String startdate,String enddate,String deadline,String storeAddress,Integer limit,Integer groupnumber,String groupdescription,String gphotoName) {
 		this.groupId = groupId;
 		this.groupname = groupname;
 		this.gametypeId = gametypeId;
@@ -51,6 +52,7 @@ public class Groups {
 		this.limit = limit;
 		this.groupnumber = groupnumber;
 		this.groupdescription = groupdescription;
+		this.gphotoName = gphotoName;
 	}
 
 
@@ -118,11 +120,11 @@ public class Groups {
 		this.memberID = memberID;
 	}
 
-	public Integer getGroupmember() {
+	public String getGroupmember() {
 		return groupmember;
 	}
 
-	public void setGroupmember(Integer groupmember) {
+	public void setGroupmember(String groupmember) {
 		this.groupmember = groupmember;
 	}
 
@@ -182,6 +184,14 @@ public class Groups {
 		this.groupdescription = groupdescription;
 	}
 
+	public String getGphotoName() {
+		return gphotoName;
+	}
+
+	public void setGphotoName(String gphotoName) {
+		this.gphotoName = gphotoName;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -217,6 +227,8 @@ public class Groups {
 		builder.append(groupnumber);
 		builder.append(", groupdescription=");
 		builder.append(groupdescription);
+		builder.append(", gphotoName=");
+		builder.append(gphotoName);
 		builder.append("]");
 		return builder.toString();
 	}

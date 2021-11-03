@@ -2,6 +2,8 @@ package joyou.forum.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +18,7 @@ import org.hibernate.SessionFactory;
 
 import com.google.gson.Gson;
 
+import joyou.Members.model.MembersBeanDao;
 import joyou.forum.dao.ForumBeanDAOImpl;
 import joyou.forum.model.ForumBean;
 import joyou.util.HibernateUtil;
@@ -38,24 +41,22 @@ public class ForumBeanInsert extends HttpServlet {
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
 
-		System.out.println(out);
 		String contentTitle = request.getParameter("contentTitle");
-		System.out.println(request.getParameter("contentTitle"));
 		Integer contentId = Integer.parseInt(request.getParameter("contentId"));
-//		Integer gameType =  Integer.parseInt(request.getParameter("gameType"));
 		String Content = request.getParameter("Content");
-//		String contentType =request.getParameter("contentType");
 		String contentDate = request.getParameter("contentDate");
-		String contentLatestUpdate = request.getParameter("contentLatestUpdate");
+		Date today = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String date = sdf.format(today);
 		
-		
-//		Integer memberId = Integer.parseInt(request.getParameter("memberId"));
-		String memberNickName = request.getParameter("memberNickName");
-		
+		int memberId = (int)request.getSession().getAttribute("memberID");
+		MembersBeanDao mDao = new MembersBeanDao(session);
+		String memberNickName = mDao.getMemberById(memberId).getNickName();	
+		String imageFileName = mDao.getMemberById(memberId).getImageFileName();	
 		
 
-		ForumBean fBean = new ForumBean(contentId, null, contentTitle, Content, null, contentDate,
-				contentLatestUpdate, null, memberNickName);
+		ForumBean fBean = new ForumBean(contentId, contentTitle, Content, date, date,
+				memberId, memberNickName,imageFileName);
 
 		ForumBeanDAOImpl fDAO = new ForumBeanDAOImpl();
 
@@ -66,7 +67,6 @@ public class ForumBeanInsert extends HttpServlet {
 		out.println(gson.toJson(map));
 		out.close();
 		session.getTransaction().commit();
-		return;
 	}
 
 }

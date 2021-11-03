@@ -84,7 +84,7 @@
 	href="${pageContext.request.contextPath}/WebMaintain/css/responsive.css" />
 <!-- modernizr JS
 		============================================ -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style4.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style5.css" type="text/css">
 <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 
 <script>

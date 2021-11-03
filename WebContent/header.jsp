@@ -145,17 +145,39 @@
                     </nav>
 				</div>
 				<div class="col-lg-2">
-					<div class="header__cart">
-						<ul>
-							<li><a
-								href="http://localhost:8080/JoYouProject/ShopingCartPage.jsp"><i
-									class="fa fa-shopping-bag"></i><span>${ShoppingCart.itemNumber}</span></a></li>
-						</ul>
-						<div class="header__cart__price">
+										<div class="header__cart">
 
-							<span>購物金額 $<c:out value="${ShoppingCart.subtotal}"
-									default="0" /></span>
-						</div>
+						<c:choose>
+							<c:when test="${ShoppingCart.itemNumber>0}">
+								<ul>
+									<li><a
+										href="http://localhost:8080/JoYouProject/ShopingCartPage.jsp"><i
+											class="fa fa-shopping-bag"></i><span style="display: "
+											id="bagcounts">${ShoppingCart.itemNumber}</span></a></li>
+								</ul>
+								<div class="header__cart__price">
+
+									<span style="display:" id="carttotal">購物金額 $<c:out
+											value="${ShoppingCart.subtotal}" default="0" /></span>
+								</div>
+
+							</c:when>
+							<c:otherwise>
+								<ul>
+									<li><a
+										href="http://localhost:8080/JoYouProject/ShopingCartPage.jsp"><i
+											class="fa fa-shopping-bag"></i><span style="display: none"
+											id="bagcounts">${ShoppingCart.itemNumber}</span></a></li>
+								</ul>
+								<div class="header__cart__price">
+
+									<span style="display: none" id="carttotal">購物金額 $<c:out
+											value="${ShoppingCart.subtotal}" default="0" /></span>
+								</div>
+							</c:otherwise>
+						</c:choose>
+
+
 					</div>
 				</div>
 			</div>
@@ -178,7 +200,7 @@
 									找什麼 <i class="fa fa-angle-down" aria-hidden="true"></i>
 								</div>
 								<ul class="main-menu-container">
-									<li><a href="#">找文章</a></li>
+									<li><a href="<c:url value='ForumListIndex.jsp'/>">找文章</a></li>
 									<li><a href="<c:url value='/SaleProductsGetServlet.do'/>">找桌遊</a></li>
 								</ul>
 							</li>

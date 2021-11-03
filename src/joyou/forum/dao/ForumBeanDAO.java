@@ -13,7 +13,7 @@ public interface ForumBeanDAO {
 
 	List<ForumBean> selectAll();
 	
-	ForumBean update(Integer contentId, String contentTitle, String contentLatestUpdate);
+	ForumBean update(Integer contentId, String contentTitle,String date);
 
 	boolean delete(Integer contentId);
 	

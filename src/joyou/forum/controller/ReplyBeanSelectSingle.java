@@ -13,6 +13,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import joyou.forum.dao.ForumBeanDAO;
 import joyou.forum.dao.ForumBeanDAOImpl;
@@ -34,16 +35,20 @@ public class ReplyBeanSelectSingle extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		Integer replyid;
 		replyid = Integer.parseInt(request.getParameter("replyId").trim());
+		request.getSession().setAttribute("replyId", replyid);
 		response.setContentType("application/json; charset=utf-8");
 		SessionFactory factory = HibernateUtil.getSessionFactory();
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
 		PrintWriter out = response.getWriter();
 		ReplyBean rBean = rDAO.select(replyid);
-		String categoriesJson = new Gson().toJson(rBean);
+		Gson gs = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		String categoriesJson = gs.toJson(rBean);
+		System.out.println(categoriesJson);
 		out.write(categoriesJson);
 		session.getTransaction().commit();
 		out.close();
+		
 	}
 }
 

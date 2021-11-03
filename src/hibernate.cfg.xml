@@ -23,6 +23,9 @@
 		<mapping class="joyou.Group.model.Groups"/>
 		<mapping class="joyou.forum.model.ForumBean"/>
 		<mapping class="joyou.forum.model.ReplyBean"/>
+		<mapping class="joyou.friends.model.FriendsBean"/>
+		<mapping class="joyou.friends.model.FriendsDetailBean"/>
+		<mapping class="joyou.friends.Recommend.FriendsRecommendBean"/>
 		
     </session-factory>
 </hibernate-configuration>

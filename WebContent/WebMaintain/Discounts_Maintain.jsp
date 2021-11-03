@@ -134,7 +134,6 @@
 	}
 
 	function Update(pt){
-		window.alert(1);
 		var xhr = new XMLHttpRequest();
 		xhr.open("GET", "<c:url value='/PrepareDiscountUpdateServlet.do' />", true);
 		xhr.send();

@@ -207,7 +207,7 @@
 					content += "<a class='primary-btn'>已售完補貨中</a>";
 				}else{
 					content += "<a class='primary-btn' href='javascript:addtoCart("
-						+ products[i].productId + ")'" + ">ADD TO CARD</a>";
+						+ products[i].productId + ")'" + ">ADD TO CART</a>";
 					}
 				
 				content += "</div></div>";
@@ -272,6 +272,8 @@
 		window.alert("成功加入購物車");
 		var bagcounts = document.getElementById("bagcounts");
 		var carttotal = document.getElementById("carttotal");
+		bagcounts.style.display="";
+		carttotal.style.display="";
 		var xhr = new XMLHttpRequest();
 		xhr.open("POST", "<c:url value='/BuyProductsJsonServlet.do?' />"
 				+ "productId=" + pId + "&counts=1", true);
@@ -386,7 +388,7 @@
 				content += "<a class='primary-btn'>已售完補貨中</a>";
 			}else{
 				content += "<a class='primary-btn' href='javascript:addtoCart("
-					+ products[i].productId + ")'" + ">ADD TO CARD</a>";
+					+ products[i].productId + ")'" + ">ADD TO CART</a>";
 				}
 			content += "</div></div>";
 
@@ -448,7 +450,7 @@
 				content += "<a class='primary-btn'>已售完補貨中</a>";
 			}else{
 				content += "<a class='primary-btn' href='javascript:addtoCart("
-					+ products[i].productId + ")'" + ">ADD TO CARD</a>";
+					+ products[i].productId + ")'" + ">ADD TO CART</a>";
 				}
 			content += "</div></div>";
 
@@ -569,7 +571,7 @@
 							<li id="memberManage"></li>
 							<li><a href="SaleProductsGetServlet.do">揪遊商城</a></li>
 							<!--  <li><a href="ProductsGetServlet.do">揪遊商城</a> -->
-							<li><a href="ProductsGetServlet.do">討論區</a></li>
+							<li><a href="./ForumListIndex.jsp">討論區</a></li>
 							<li><a href="./groups.jsp">揪遊團</a></li>
 							<li><a href="">聯繫我們</a></li>
 						</ul>
@@ -577,16 +579,38 @@
 				</div>
 				<div class="col-lg-2">
 					<div class="header__cart">
-						<ul>
-							<li><a
-								href="http://localhost:8080/JoYouProject/ShopingCartPage.jsp"><i
-									class="fa fa-shopping-bag"></i><span id="bagcounts">${ShoppingCart.itemNumber}</span></a></li>
-						</ul>
-						<div class="header__cart__price">
 
-							<span id="carttotal">購物金額 $<c:out
-									value="${ShoppingCart.subtotal}" default="0" /></span>
-						</div>
+						<c:choose>
+							<c:when test="${ShoppingCart.itemNumber>0}">
+								<ul>
+									<li><a
+										href="http://localhost:8080/JoYouProject/ShopingCartPage.jsp"><i
+											class="fa fa-shopping-bag"></i><span style="display:"
+											id="bagcounts">${ShoppingCart.itemNumber}</span></a></li>
+								</ul>
+								<div class="header__cart__price">
+
+									<span style="display:" id="carttotal">購物金額 $<c:out
+											value="${ShoppingCart.subtotal}" default="0" /></span>
+								</div>
+
+							</c:when>
+							<c:otherwise>
+								<ul>
+									<li><a
+										href="http://localhost:8080/JoYouProject/ShopingCartPage.jsp"><i
+											class="fa fa-shopping-bag"></i><span style="display: none"
+											id="bagcounts">${ShoppingCart.itemNumber}</span></a></li>
+								</ul>
+								<div class="header__cart__price">
+
+									<span style="display: none" id="carttotal">購物金額 $<c:out
+											value="${ShoppingCart.subtotal}" default="0" /></span>
+								</div>
+							</c:otherwise>
+						</c:choose>
+
+
 					</div>
 				</div>
 			</div>
@@ -609,7 +633,7 @@
 									找什麼 <i class="fa fa-angle-down" aria-hidden="true"></i>
 								</div>
 								<ul class="main-menu-container">
-									<li><a href="#">找文章</a></li>
+									<li><a href="<c:url value='ForumListIndex.jsp'/>">找文章</a></li>
 									<li><a href="<c:url value='/SaleProductsGetServlet.do'/>">找桌遊</a></li>
 								</ul>
 							</li>
@@ -712,7 +736,7 @@
 																<c:when test="${ProductBean.productStock>0}">
 																	<a class='primary-btn'
 																		href='javascript:addtoCart(${ProductBean.productId})'>ADD
-																		TO CARD</a>
+																		TO CART</a>
 																</c:when>
 																<c:otherwise>
 																	<a class='primary-btn'>已售完補貨中</a>
@@ -877,7 +901,7 @@
 														<c:when test="${ProductBean.productStock>0}">
 															<a class='primary-btn'
 																href='javascript:addtoCart(${ProductBean.productId})'>ADD
-																TO CARD</a>
+																TO CART</a>
 														</c:when>
 														<c:otherwise>
 															<a class='primary-btn'>已售完補貨中</a>

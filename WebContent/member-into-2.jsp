@@ -55,6 +55,7 @@
 
                     if (result.memberMailisDuplicate == "false") {
                         //btnObj.removeAttribute("disabled");
+                        document.getElementById("btn_submit").style.background="blue";
                         message = "&nbsp; &nbsp; 信箱可用";
                     } else {
                         message = "&nbsp; &nbsp; 信箱重複，請重新輸入信箱";
@@ -221,8 +222,8 @@
             document.getElementsByName("userPhone")[0].value="0912345678";
             -->
 
-            document.getElementsByName("userMail")[0].value="eeit117G2@gmail.com";
-            document.getElementsByName("userAccount")[0].value="eeit117";
+            document.getElementsByName("userMail")[0].value="eeit117g2@gmail.com";
+            document.getElementsByName("userAccount")[0].value="eeit117g2";
             document.getElementsByName("userPassword")[0].value="password";
             document.getElementsByName("userPassword2")[0].value="password";
             document.getElementsByName("userTrueName")[0].value="張君雅";
@@ -417,7 +418,7 @@
             </tbody></table>
            
                 
-            <input type="button" value="一件輸入" onClick="inputData()" />
+            <input type="button" value="一鍵輸入" onClick="inputData()" />
            
             <div class="SB_MemberClause_btn jooshop_btn_color">
                 <input name="btn_submit" id="btn_submit" value="確認" type="submit"><!---->
@@ -440,7 +441,9 @@
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
-
+	<script>
+	document.getElementById("btn_submit").style.background="grey";
+	</script>
 
 </body>
 

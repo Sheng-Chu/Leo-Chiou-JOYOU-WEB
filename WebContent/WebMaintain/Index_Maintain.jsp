@@ -578,11 +578,11 @@ table.option-table td {
 					                }
 					            },
 					            data: [
-					                {value: 100 , name: '進入首頁'},
-					                {value: 77, name: '註冊'},
-					                {value: 50 , name: '瀏覽商品頁面'},
-					                {value: 45 , name: '放入購物車'},
-					                {value: 5, name: '完成交易'},
+					                {value: ${footlist[10]} , name: '進入首頁'},
+					                {value: ${footlist[11]} , name: '註冊'},
+					                {value: ${footlist[15]} , name: '瀏覽商品頁面'},
+					                {value: ${footlist[17]} , name: '放入購物車'},
+					                {value: ${footlist[18]}, name: '完成交易'},
 					            ]
 					        }
 					    ]
@@ -643,6 +643,8 @@ table.option-table td {
 			
 	
 </script>
+
+
 <!-- 統計script開始 -->
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="${pageContext.request.contextPath}/WebMaintain/iancss/js/numscroller-1.0.js"></script>
@@ -835,7 +837,7 @@ table.option-table td {
 					<div class='numscroller-info-top'>銷售總額統計</div>
 					<div class='numscroller numscroller-big-bottom' data-slno='2'
 						data-min='0' data-max='${countsell}' data-delay='6'
-						data-increment='27'>0</div>
+						data-increment='225'>0</div>
 
 				</div>
 
